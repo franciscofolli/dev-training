@@ -15,30 +15,30 @@ export class CoursesController {
     // in this example the route is: courses/list 
     @Get()
     async findall(@Res() response){
-        return response.status(200).send('Listagem de Cursos');
+        return response.status(200).send(this.coursesService.findAll());
     }
 
     @Get(':id') // this ":" notation before param name is an declaration to nestjs that we need to get the dynamic parameter
     // with @Param decorator we can define the params that we need to receive and get they in a decorated attribute
     // declaring a property in @Param() decorator we can call only one parameter (destructuring)
     async findOne(@Param('id') id: number){
-        return `Curso #${id}`;
+        return this.coursesService.findOne(id);
     }
 
     @Post()
-    @HttpCode(HttpStatus.NO_CONTENT) 
+    @HttpCode(HttpStatus.CREATED) 
     // declaring a property in @Body() decorator we can call only one parameter (destructuring)
     async create(@Body() body: any){
-        return body;
+        return this.coursesService.create(body);
     }
 
     @Patch(':id')
     async update(@Param('id') id: number, @Body() body: any){
-        return `Atualização de dados do curso #${id}`
+        return this.coursesService.update(id, body);
     }
 
     @Delete(':id')
     async remove(@Param('id') id: number){
-        return `Exclusão do C urso #${id}`;
+        return this.coursesService.remove(id);
     }
 }

@@ -26,18 +26,18 @@ export class CoursesService {
     }
 
     findOne(id: number){
-        return this.courses.find((course: Course) => course.id === id)
+        return this.courses.find((course: Course) => course.id === Number(id))
     }
 
     
     update(id: number, updateCourseDto: any){
-        const courseIndex: number = this.courses.findIndex(course => course.id === id);
+        const courseIndex: number = this.courses.findIndex(course => course.id === Number(id));
         this.courses[courseIndex] = updateCourseDto;
     }
 
     
     remove(id: number){
-        const courseIndex: number = this.courses.findIndex(course => course.id === id);
+        const courseIndex: number = this.courses.findIndex(course => course.id === Number(id));
 
         if(courseIndex >= 0) {
             this.courses.splice(courseIndex, 1);
