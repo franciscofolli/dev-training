@@ -1,5 +1,7 @@
 import { Body, Controller, Delete, Get, HttpCode, HttpStatus, Param, Patch, Post, Put, Req, Res } from '@nestjs/common';
 import { CoursesService } from './courses.service';
+import { CreateCourseDto } from './dtos/create-course-dto';
+import { UpdateCourseDto } from './dtos/update-course-dto';
 
 // decorator that define the class as a controller for nestjs knowledge
 // with this decorator, nestjs can call controller endpoints that haves requests decorators to declare the endpoints as below
@@ -28,13 +30,13 @@ export class CoursesController {
     @Post()
     @HttpCode(HttpStatus.CREATED) 
     // declaring a property in @Body() decorator we can call only one parameter (destructuring)
-    async create(@Body() body: any){
-        return this.coursesService.create(body);
+    async create(@Body() createCourseDto: CreateCourseDto){
+        return this.coursesService.create(createCourseDto);
     }
 
     @Patch(':id')
-    async update(@Param('id') id: number, @Body() body: any){
-        return this.coursesService.update(id, body);
+    async update(@Param('id') id: number, @Body() updateCourseDto: UpdateCourseDto){
+        return this.coursesService.update(id, updateCourseDto);
     }
 
     @Delete(':id')
