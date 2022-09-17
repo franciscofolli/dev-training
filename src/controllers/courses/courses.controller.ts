@@ -1,4 +1,4 @@
-import { Controller, Get, Param, Req, Res } from '@nestjs/common';
+import { Body, Controller, Get, Param, Post, Req, Res } from '@nestjs/common';
 
 // decorator that define the class as a controller for nestjs knowledge
 // with this decorator, nestjs can call controller endpoints that haves requests decorators to declare the endpoints as below
@@ -17,8 +17,14 @@ export class CoursesController {
     // with @Param decorator we can define the params that we need to receive and get they in a decorated attribute
     // declaring a property in @Param() decorator we can call only one parameter (destructuring)
     async findOne(@Param('id') id: number){
-        // Put your magic here
         return `Curso #${id}`;
+    }
+
+    @Post()
+    // declaring a property in @Body() decorator we can call only one parameter (destructuring)
+    async create(@Body() body: any){
+        // Put your magic here
+        return body;
     }
 
 }
